@@ -21,7 +21,7 @@
 {
     // 如果是根控制器不需要手势
     if (self.navigationController.viewControllers.count <= 1) return NO;
-    
+    // 检查是否有转场动画
     if ([[self.navigationController valueForKey:@"_isTransitioning"] boolValue]) return NO;
     
     CGPoint translation = [gestureRecognizer translationInView:gestureRecognizer.view];
@@ -80,6 +80,7 @@
 
 - (FullScreenPopGestureRecognizerDelegate *)fullScreenPopGestureRecognizerDelegate
 {
+    // 关联对象检查是否已经存在(类似于懒加载) _cmd是关联对象常用。
     FullScreenPopGestureRecognizerDelegate *delegate = objc_getAssociatedObject(self, _cmd);
     // 进行懒加载
     if (!delegate) {
